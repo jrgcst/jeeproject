@@ -6,4 +6,13 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>model</artifactId>
+  
+  <dependencies>
+ 	 <dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-jpa</artifactId>
+	</dependency>
+	</dependencies>
+  
+
 </project>
