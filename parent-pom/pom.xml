@@ -8,7 +8,7 @@
 	<properties>
 		<spring.version>4.0.0.RELEASE</spring.version>
 		<junit.version>4.11</junit.version>
-		<jpa.version>1.0.1.RELEASE</jpa.version>
+		<persistenceapi.version>1.0.2</persistenceapi.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -30,9 +30,9 @@
 				<version>${spring.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.springframework.data</groupId>
-				<artifactId>spring-data-jpa</artifactId>
-				<version>${jpa.version}</version>
+				<groupId>javax.persistence</groupId>
+				<artifactId>persistence-api</artifactId>
+				<version>${persistenceapi.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

@@ -8,9 +8,9 @@
   <artifactId>model</artifactId>
   
   <dependencies>
- 	 <dependency>
-				<groupId>org.springframework.data</groupId>
-				<artifactId>spring-data-jpa</artifactId>
+	<dependency>
+		<groupId>javax.persistence</groupId>
+		<artifactId>persistence-api</artifactId>
 	</dependency>
 	</dependencies>
   
