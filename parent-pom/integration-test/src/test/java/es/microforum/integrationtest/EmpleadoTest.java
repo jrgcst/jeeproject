@@ -48,7 +48,6 @@ public class EmpleadoTest {
 	public void testAlta() {
 		//ctx.load("classpath:app-context.xml");
 		//ctx.refresh();
-		
 		//EmpleadoService empleadoService = ctx.getBean("empleadoService", EmpleadoService.class);
 		
 		empleado1.setCantidadHoras(160d);
@@ -74,9 +73,28 @@ public class EmpleadoTest {
 		
 	}
 	
-	//@Test
+	@Test
 	public void testBaja() {
-		fail("Not yet implemented");
+		empleado1.setCantidadHoras(160d);
+		empleado1.setDireccion("dir1");
+		empleado1.setDni("dni1");
+		empleado1.setEmpleadocol("empleadocol1");
+		empleado1.setImagen(null);
+		empleado1.setNombre("nom1");
+		empleado1.setSalarioAnual(12000d);
+		empleado1.setTipoEmpleado("tipo1");
+		empleado1.setValorHora(7d);
+		empleado1.setVersion(1);
+		empleado1.setEmpresa(null);
+		empleadoService.delete(empleado1);
+		String comprobacion=null;
+		List<Empleado> empleados = empleadoService.findAll();
+//		for (Empleado empleado: empleados) {
+//			if((empleado.getDni()).equals("dni1")){
+//				comprobacion="true";
+//			}
+//		}
+		assertTrue(empleados.size()==0);
 	}
 	
 	//@Test
