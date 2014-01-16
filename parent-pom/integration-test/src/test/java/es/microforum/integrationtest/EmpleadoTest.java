@@ -6,19 +6,22 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.microforum.model.Empleado;
 import es.microforum.serviceapi.EmpleadoService;
 
 
-
-
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = "classpath:app-context.xml") //esto crea un contexto ya
+//@TransactionConfiguration(transactionManager="transactionManager", defaultRollback=true)
 public class EmpleadoTest {
 	Empleado empleado1;
 	Empleado empleado2;
 	
-	GenericXmlApplicationContext ctx;
+	GenericXmlApplicationContext ctx; //se ha de eliminar este ctx y poner @Autowired (http://stackoverflow.com/questions/4166983/rollback-transaction-when-testing-service-with-spring-hibernate-junit)
 	
 	@Before
 	public void setUp() throws Exception {
@@ -29,7 +32,10 @@ public class EmpleadoTest {
 		
 	}
 
+	
+	
 	@Test
+//	@Transactional
 	public void testAlta() {
 		ctx.load("classpath:app-context.xml");
 		ctx.refresh();
@@ -59,17 +65,17 @@ public class EmpleadoTest {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testBaja() {
 		fail("Not yet implemented");
 	}
 	
-	@Test
+	//@Test
 	public void testModificacion() {
 		fail("Not yet implemented");
 	}
 	
-	@Test
+	//@Test
 	public void testConsulta() {
 		fail("Not yet implemented");
 	}
