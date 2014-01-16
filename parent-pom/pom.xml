@@ -7,7 +7,7 @@
 	<packaging>pom</packaging>
 	<properties>
 		<spring.version>4.0.0.RELEASE</spring.version>
-		<springtest.version>2.5</springtest.version>
+<!-- 		<springtest.version>2.5</springtest.version> -->
 		<junit.version>4.11</junit.version>
 		<persistenceapi.version>1.0.2</persistenceapi.version>
 		<jpa.version>1.4.3.RELEASE</jpa.version>
@@ -136,7 +136,7 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-test</artifactId>
-				<version>${springtest.version}</version>
+				<version>${spring.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

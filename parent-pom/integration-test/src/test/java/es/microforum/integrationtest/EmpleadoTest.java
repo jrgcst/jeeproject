@@ -7,28 +7,37 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.microforum.model.Empleado;
 import es.microforum.serviceapi.EmpleadoService;
 
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = "classpath:app-context.xml") //esto crea un contexto ya
-//@TransactionConfiguration(transactionManager="transactionManager", defaultRollback=true)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:app-context.xml") //esto crea un contexto
+@TransactionConfiguration(transactionManager="transactionManager", defaultRollback=true)
+@Transactional
 public class EmpleadoTest {
+	
+	@Autowired
+	private EmpleadoService empleadoService;
+	
 	Empleado empleado1;
 	Empleado empleado2;
 	
-	GenericXmlApplicationContext ctx; //se ha de eliminar este ctx y poner @Autowired (http://stackoverflow.com/questions/4166983/rollback-transaction-when-testing-service-with-spring-hibernate-junit)
+	//GenericXmlApplicationContext ctx; //se ha de eliminar este ctx y poner @Autowired (http://stackoverflow.com/questions/4166983/rollback-transaction-when-testing-service-with-spring-hibernate-junit)
 	
 	@Before
 	public void setUp() throws Exception {
 		empleado1 = new Empleado();
 		empleado2 = new Empleado();
 		
-		ctx = new GenericXmlApplicationContext();
+		//ctx = new GenericXmlApplicationContext();
 		
 	}
 
@@ -37,10 +46,10 @@ public class EmpleadoTest {
 	@Test
 //	@Transactional
 	public void testAlta() {
-		ctx.load("classpath:app-context.xml");
-		ctx.refresh();
+		//ctx.load("classpath:app-context.xml");
+		//ctx.refresh();
 		
-		EmpleadoService empleadoService = ctx.getBean("empleadoService", EmpleadoService.class);
+		//EmpleadoService empleadoService = ctx.getBean("empleadoService", EmpleadoService.class);
 		
 		empleado1.setCantidadHoras(160d);
 		empleado1.setDireccion("dir1");
