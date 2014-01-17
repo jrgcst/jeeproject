@@ -16,19 +16,19 @@ import es.microforum.model.Empleado;
 public interface EmpleadoService {
 
 	// Find all contacts
-	public List<Empleado> findAll();
+	public List<Empleado> consultaListado();
 	
 	// Find a contact with details by id
-	public Empleado findByDni(String dni);
+	public Empleado consultaPorDni(String dni);
 	
 	// Find a contact with details by nombre
-	public Empleado findByNombre(String nombre);
+	public Empleado consultaPorNombre(String nombre);
 	
 	// Insert or update a contact	
-	public Empleado save(Empleado empleado);
+	public Empleado altaModificacion(Empleado empleado);
 	
 	// Delete a contact	
-	public void delete(Empleado empleado);
+	public void baja(Empleado empleado);
 	
 		
 }

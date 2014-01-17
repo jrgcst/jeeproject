@@ -13,7 +13,6 @@ import es.microforum.model.Empresa;
  */
 public interface EmpresaRepository extends CrudRepository<Empresa, String> {
 
-	//public Empresa findByNif(String nif);
 	public Empresa findByNombre(String nombre);
 	
 		

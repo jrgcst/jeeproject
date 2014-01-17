@@ -34,24 +34,24 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 	private EmpleadoRepository empleadoRepository;
 	
 	@Transactional(readOnly=true)
-	public List<Empleado> findAll() {
+	public List<Empleado> consultaListado() {
 		return Lists.newArrayList(empleadoRepository.findAll());
 	}	
 	
 	@Transactional(readOnly=true)	
-	public Empleado findByNombre(String nombre) {
+	public Empleado consultaPorNombre(String nombre) {
 		return empleadoRepository.findByNombre(nombre);
 	}
 
-	public Empleado findByDni(String dni) {
-		return empleadoRepository.findByDni(dni);
+	public Empleado consultaPorDni(String dni) {
+		return empleadoRepository.findOne(dni);
 	}
 
-	public Empleado save(Empleado empleado) {
+	public Empleado altaModificacion(Empleado empleado) {
 		return empleadoRepository.save(empleado);
 	}
 
-	public void delete(Empleado empleado) {
+	public void baja(Empleado empleado) {
 		empleadoRepository.delete(empleado);
 		
 	}

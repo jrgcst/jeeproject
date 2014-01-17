@@ -9,18 +9,21 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class EmpresaTest {
-
+	SimpleDateFormat sdf;
+	Empresa empresa1;
+	Empresa empresa2;
+	Empresa empresa3;
+	
 	@Before
 	public void setUp() throws Exception {
-		
+		sdf = new SimpleDateFormat("yyyy-MM-dd");
+		empresa1 = new Empresa();
+		empresa2 = new Empresa();
+		empresa3 = new Empresa();
 	}
 
 	@Test
 	public void testEquals() throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Empresa empresa1 = new Empresa();
-		Empresa empresa2 = new Empresa();
-		Empresa empresa3 = new Empresa();
 		empresa1.setDireccionFiscal("direccion1");
 		empresa1.setEmpleados(null);
 		empresa1.setFechaInicioActividades(sdf.parse("1999-01-01"));

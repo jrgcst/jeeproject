@@ -6,19 +6,20 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class EmpleadoTest {
-
+	Empleado empleado1;
+	Empleado empleado2;
+	Empleado empleado3;
 	
 	@Before
 	public void setUp() throws Exception {
-		
+		empleado1 = new Empleado();
+		empleado2 = new Empleado();
+		empleado3 = new Empleado();
 		
 	}
 	
 	@Test
 	public void testEquals() {
-		Empleado empleado1 = new Empleado();
-		Empleado empleado2 = new Empleado();
-		Empleado empleado3 = new Empleado();
 		empleado1.setCantidadHoras(160d);
 		empleado1.setDireccion("dir1");
 		empleado1.setDni("dni1");
@@ -30,7 +31,6 @@ public class EmpleadoTest {
 		empleado1.setValorHora(7d);
 		empleado1.setVersion(1);
 		empleado1.setEmpresa(null);
-		
 		empleado2.setCantidadHoras(160d);
 		empleado2.setDireccion("dir2");
 		empleado2.setDni("dni2");
@@ -42,7 +42,6 @@ public class EmpleadoTest {
 		empleado2.setValorHora(7d);
 		empleado2.setVersion(1);
 		empleado2.setEmpresa(null);
-		
 		empleado3.setCantidadHoras(160d);
 		empleado3.setDireccion("dir2");
 		empleado3.setDni("dni2");

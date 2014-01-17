@@ -13,7 +13,6 @@ import es.microforum.model.Empleado;
  */
 public interface EmpleadoRepository extends CrudRepository<Empleado, String> {
 
-	public Empleado findByDni(String dni);
 	public Empleado findByNombre(String nombre);
 	
 		

@@ -14,20 +14,19 @@ import es.microforum.model.Empresa;
 public interface EmpresaService {
 
 	// Find all contacts
-	public List<Empresa> findAll();
+	public List<Empresa> consultaListado();
 	
 	// Find a contact with details by id
-	//public Empresa findByNif(String nif);
-	public Empresa findOne(String nif);
+	public Empresa consultaPorNif(String nif);
 	
 	// Find a contact with details by nombre
-	public Empresa findByNombre(String nombre);
+	public Empresa consultaPorNombre(String nombre);
 	
 	// Insert or update a contact	
-	public Empresa save(Empresa empresa);
+	public Empresa altaModificacion(Empresa empresa);
 	
 	// Delete a contact	
-	public void delete(Empresa empresa);
+	public void baja(Empresa empresa);
 	
 		
 }

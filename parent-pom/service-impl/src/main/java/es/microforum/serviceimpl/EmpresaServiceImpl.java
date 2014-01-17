@@ -31,28 +31,25 @@ public class EmpresaServiceImpl implements EmpresaService {
 	private EmpresaRepository empresaRepository;
 	
 	@Transactional(readOnly=true)
-	public List<Empresa> findAll() {
+	public List<Empresa> consultaListado() {
 		return Lists.newArrayList(empresaRepository.findAll());
 	}	
 	
 	@Transactional(readOnly=true)	
-	public Empresa findByNombre(String nombre) {
+	public Empresa consultaPorNombre(String nombre) {
 		return empresaRepository.findByNombre(nombre);
 	}
 
-//	public Empresa findByNif(String nif) {
-//		return empresaRepository.findByNif(nif);
-//	}
-	
-	public Empresa findOne(String nif) {
+	@Transactional(readOnly=true)
+	public Empresa consultaPorNif(String nif) {
 		return empresaRepository.findOne(nif);
 	}
 
-	public Empresa save(Empresa empresa) {
+	public Empresa altaModificacion(Empresa empresa) {
 		return empresaRepository.save(empresa);
 	}
 
-	public void delete(Empresa empresa) {
+	public void baja(Empresa empresa) {
 		empresaRepository.delete(empresa);
 		
 	}
