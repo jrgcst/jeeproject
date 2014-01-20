@@ -55,14 +55,13 @@ public class EmpresaTest {
 		empresaService.altaModificacion(empresa1);
 		String comprobacion = null;
 		List<Empresa> empresas = empresaService.consultaListado();
-		System.out
-				.println("Comprobacion de alta, de la empresa con nif = nif1");
-		System.out.println("Empresas: ");
+		//System.out.println("Comprobacion de alta, de la empresa con nif = nif1");
+		//System.out.println("Empresas: ");
 		for (Empresa empresa : empresas) {
 			if ((empresa.getNif()).equals("nif1")) {
 				comprobacion = "true";
 			}
-			System.out.println(empresa.getNif() + " | " + empresa.getNombre());
+			//System.out.println(empresa.getNif() + " | " + empresa.getNombre());
 		}
 		assertTrue(comprobacion.equals("true"));
 
@@ -73,9 +72,8 @@ public class EmpresaTest {
 	public void testBajaEmpresa() {
 		empresaService.baja(empresa1);
 		List<Empresa> empresas = empresaService.consultaListado();
-		System.out
-				.println("Comprobacion de baja, de la empresa con nif = nif1");
-		System.out.println("Numero de empresas: " + empresas.size());
+		//System.out.println("Comprobacion de baja, de la empresa con nif = nif1");
+		//System.out.println("Numero de empresas: " + empresas.size());
 		assertTrue(empresas.size() == 0);
 	}
 
@@ -85,24 +83,23 @@ public class EmpresaTest {
 		empresaService.altaModificacion(empresa1);
 		empresaService.altaModificacion(empresa2);
 		List<Empresa> empresas = empresaService.consultaListado();
-		System.out.println("Comprobacion de alta de 2 empresas");
-		System.out.println("Empresas: ");
-		for (Empresa empresa : empresas) {
-			System.out.println(empresa.getNif() + " | " + empresa.getNombre());
-		}
+//		System.out.println("Comprobacion de alta de 2 empresas");
+//		System.out.println("Empresas: ");
+//		for (Empresa empresa : empresas) {
+//			System.out.println(empresa.getNif() + " | " + empresa.getNombre());
+//		}
 		Empresa empresaA = empresaService.consultaPorNif(empresa1.getNif());
 		empresaA.setNombre("nomA");
 		empresaService.altaModificacion(empresaA);
 		String comprobacion = null;
 		empresas = empresaService.consultaListado();
-		System.out
-				.println("Comprobacion de modificacion del nombre, de la empresa con nif = nif1");
-		System.out.println("Empresas: ");
+		//System.out.println("Comprobacion de modificacion del nombre, de la empresa con nif = nif1");
+		//System.out.println("Empresas: ");
 		for (Empresa empresa : empresas) {
 			if ((empresa.getNombre()).equals("nomA")) {
 				comprobacion = "true";
 			}
-			System.out.println(empresa.getNif() + " | " + empresa.getNombre());
+			//System.out.println(empresa.getNif() + " | " + empresa.getNombre());
 		}
 		assertTrue(comprobacion.equals("true"));
 	}
@@ -113,19 +110,16 @@ public class EmpresaTest {
 		empresaService.altaModificacion(empresa1);
 		empresaService.altaModificacion(empresa2);
 		List<Empresa> empresas = empresaService.consultaListado();
-		System.out.println("Comprobacion del listado de todas las empresas");
+		//System.out.println("Comprobacion del listado de todas las empresas");
 		for (Empresa empresa : empresas) {
-			System.out.println("- Empresa: " + empresa.getNif() + " | "
-					+ empresa.getNombre());
+			//System.out.println("- Empresa: " + empresa.getNif() + " | "+ empresa.getNombre());
 		}
 		Empresa empresaB = empresaService.consultaPorNif("nif1");
 		Empresa empresaC = empresaService.consultaPorNombre("nom2");
-		System.out
-				.println("Comprobacion de busqueda por nif, de la empresa con nif = nif1");
-		System.out.println(empresaB.getNif() + " | " + empresaB.getNombre());
-		System.out
-				.println("Comprobacion de busqueda por nombre, de la empresa con nombre = nom2");
-		System.out.println(empresaC.getNif() + " | " + empresaC.getNombre());
+//		System.out.println("Comprobacion de busqueda por nif, de la empresa con nif = nif1");
+//		System.out.println(empresaB.getNif() + " | " + empresaB.getNombre());
+//		System.out.println("Comprobacion de busqueda por nombre, de la empresa con nombre = nom2");
+//		System.out.println(empresaC.getNif() + " | " + empresaC.getNombre());
 		assertTrue(empresas.size() == 2);
 		assertTrue(empresaB.getNombre().equals("nom1"));
 		assertTrue(empresaC.getNif().equals("nif2"));
