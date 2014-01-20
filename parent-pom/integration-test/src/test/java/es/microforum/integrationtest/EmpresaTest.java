@@ -18,19 +18,17 @@ import es.microforum.model.Empresa;
 import es.microforum.serviceapi.EmpresaService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:app-context.xml") //esto crea un contexto
-@TransactionConfiguration(defaultRollback=true)
+@ContextConfiguration(locations = "classpath:app-context.xml")
+@TransactionConfiguration(defaultRollback = true)
 public class EmpresaTest {
 	SimpleDateFormat sdf;
-	
+
 	@Autowired
 	private EmpresaService empresaService;
-	
+
 	Empresa empresa1;
 	Empresa empresa2;
-	
-	//GenericXmlApplicationContext ctx; //se ha de eliminar este ctx y poner @Autowired (http://stackoverflow.com/questions/4166983/rollback-transaction-when-testing-service-with-spring-hibernate-junit)
-	
+
 	@Before
 	public void setUp() throws Exception {
 		sdf = new SimpleDateFormat("yyyyMMdd");
@@ -48,45 +46,39 @@ public class EmpresaTest {
 		empresa2.setVersion(1);
 		empresa2.setFechaInicioActividades(sdf.parse("20140202"));
 		empresa2.setEmpleados(null);
-		
-		//ctx = new GenericXmlApplicationContext();
-		
+
 	}
 
-	
-	
 	@Test
 	@Transactional
 	public void testAltaEmpresa() {
-		//ctx.load("classpath:app-context.xml");
-		//ctx.refresh();
-		//EmpleadoService empleadoService = ctx.getBean("empleadoService", EmpleadoService.class);
-				
 		empresaService.altaModificacion(empresa1);
-		String comprobacion=null;
+		String comprobacion = null;
 		List<Empresa> empresas = empresaService.consultaListado();
-		System.out.println("Comprobacion de alta, de la empresa con nif = nif1");
+		System.out
+				.println("Comprobacion de alta, de la empresa con nif = nif1");
 		System.out.println("Empresas: ");
-		for (Empresa empresa: empresas) {
-			if((empresa.getNif()).equals("nif1")){
-				comprobacion="true";
+		for (Empresa empresa : empresas) {
+			if ((empresa.getNif()).equals("nif1")) {
+				comprobacion = "true";
 			}
-			System.out.println(empresa.getNif()+" | "+empresa.getNombre());
+			System.out.println(empresa.getNif() + " | " + empresa.getNombre());
 		}
 		assertTrue(comprobacion.equals("true"));
-		
+
 	}
-	
+
 	@Test
 	@Transactional
 	public void testBajaEmpresa() {
 		empresaService.baja(empresa1);
 		List<Empresa> empresas = empresaService.consultaListado();
-		System.out.println("Comprobacion de baja, de la empresa con nif = nif1");
+		System.out
+				.println("Comprobacion de baja, de la empresa con nif = nif1");
 		System.out.println("Numero de empresas: " + empresas.size());
-		assertTrue(empresas.size()==0);
+		assertTrue(empresas.size() == 0);
 	}
-	
+
 	@Test
 	@Transactional
 	public void testModificacionEmpresa() {
@@ -95,25 +87,26 @@ public class EmpresaTest {
 		List<Empresa> empresas = empresaService.consultaListado();
 		System.out.println("Comprobacion de alta de 2 empresas");
 		System.out.println("Empresas: ");
-		for (Empresa empresa: empresas) {
-			System.out.println(empresa.getNif()+" | "+empresa.getNombre());
+		for (Empresa empresa : empresas) {
+			System.out.println(empresa.getNif() + " | " + empresa.getNombre());
 		}
 		Empresa empresaA = empresaService.consultaPorNif(empresa1.getNif());
 		empresaA.setNombre("nomA");
 		empresaService.altaModificacion(empresaA);
-		String comprobacion=null;
+		String comprobacion = null;
 		empresas = empresaService.consultaListado();
-		System.out.println("Comprobacion de modificacion del nombre, de la empresa con nif = nif1");
+		System.out
+				.println("Comprobacion de modificacion del nombre, de la empresa con nif = nif1");
 		System.out.println("Empresas: ");
-		for (Empresa empresa: empresas) {
-			if((empresa.getNombre()).equals("nomA")){
-				comprobacion="true";
+		for (Empresa empresa : empresas) {
+			if ((empresa.getNombre()).equals("nomA")) {
+				comprobacion = "true";
 			}
-			System.out.println(empresa.getNif()+" | "+empresa.getNombre());
+			System.out.println(empresa.getNif() + " | " + empresa.getNombre());
 		}
 		assertTrue(comprobacion.equals("true"));
 	}
-	
+
 	@Test
 	@Transactional
 	public void testConsultaEmpresa() {
@@ -122,15 +115,18 @@ public class EmpresaTest {
 		List<Empresa> empresas = empresaService.consultaListado();
 		System.out.println("Comprobacion del listado de todas las empresas");
 		for (Empresa empresa : empresas) {
-			System.out.println("- Empresa: "+empresa.getNif()+" | "+empresa.getNombre());
+			System.out.println("- Empresa: " + empresa.getNif() + " | "
+					+ empresa.getNombre());
 		}
 		Empresa empresaB = empresaService.consultaPorNif("nif1");
 		Empresa empresaC = empresaService.consultaPorNombre("nom2");
-		System.out.println("Comprobacion de busqueda por nif, de la empresa con nif = nif1");
-		System.out.println(empresaB.getNif()+" | "+empresaB.getNombre());
-		System.out.println("Comprobacion de busqueda por nombre, de la empresa con nombre = nom2");
-		System.out.println(empresaC.getNif()+" | "+empresaC.getNombre());
-		assertTrue(empresas.size()==2);
+		System.out
+				.println("Comprobacion de busqueda por nif, de la empresa con nif = nif1");
+		System.out.println(empresaB.getNif() + " | " + empresaB.getNombre());
+		System.out
+				.println("Comprobacion de busqueda por nombre, de la empresa con nombre = nom2");
+		System.out.println(empresaC.getNif() + " | " + empresaC.getNombre());
+		assertTrue(empresas.size() == 2);
 		assertTrue(empresaB.getNombre().equals("nom1"));
 		assertTrue(empresaC.getNif().equals("nif2"));
 	}

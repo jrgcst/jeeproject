@@ -1,6 +1,3 @@
-/**
- * Created on Oct 18, 2011
- */
 package es.microforum.serviceimpl;
 
 import java.util.List;
@@ -18,10 +15,6 @@ import com.google.common.collect.Lists;
 
 
 
-/**
- * @author Clarence
- *
- */
 @Service("empresaService")
 @Repository
 @Transactional

@@ -1,6 +1,3 @@
-/**
- * Created on Oct 18, 2011
- */
 package es.microforum.serviceimpl;
 
 import java.util.List;
@@ -18,13 +15,6 @@ import es.microforum.serviceapi.EmpleadoService;
 
 
 
-
-
-
-/**
- * @author Clarence
- *
- */
 @Service("empleadoService")
 @Repository
 @Transactional

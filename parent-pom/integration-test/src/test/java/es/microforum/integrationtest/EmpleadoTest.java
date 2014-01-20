@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -19,10 +18,8 @@ import es.microforum.serviceapi.EmpleadoService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:app-context.xml") //esto crea un contexto
-//@TransactionConfiguration(transactionManager="transactionManager", defaultRollback=true)
+@ContextConfiguration(locations = "classpath:app-context.xml")
 @TransactionConfiguration(defaultRollback=true)
-//@Transactional
 public class EmpleadoTest {
 	
 	@Autowired
@@ -31,8 +28,7 @@ public class EmpleadoTest {
 	Empleado empleado1;
 	Empleado empleado2;
 	
-	//GenericXmlApplicationContext ctx; //se ha de eliminar este ctx y poner @Autowired (http://stackoverflow.com/questions/4166983/rollback-transaction-when-testing-service-with-spring-hibernate-junit)
-	
+		
 	@Before
 	public void setUp() throws Exception {
 		empleado1 = new Empleado();
@@ -59,9 +55,6 @@ public class EmpleadoTest {
 		empleado2.setValorHora(7d);
 		empleado2.setVersion(1);
 		empleado2.setEmpresa(null);
-		
-		//ctx = new GenericXmlApplicationContext();
-		
 	}
 
 	
@@ -69,10 +62,6 @@ public class EmpleadoTest {
 	@Test
 	@Transactional
 	public void testAltaEmpleado() {
-		//ctx.load("classpath:app-context.xml");
-		//ctx.refresh();
-		//EmpleadoService empleadoService = ctx.getBean("empleadoService", EmpleadoService.class);
-				
 		empleadoService.altaModificacion(empleado1);
 		String comprobacion=null;
 		List<Empleado> empleados = empleadoService.consultaListado();
@@ -92,7 +81,6 @@ public class EmpleadoTest {
 	@Transactional
 	public void testBajaEmpleado() {
 		empleadoService.baja(empleado1);
-		String comprobacion=null;
 		List<Empleado> empleados = empleadoService.consultaListado();
 		System.out.println("Comprobacion de baja de empleado con dni=dni1");
 		System.out.println("Numero de empleados: " + empleados.size());
