@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+//import es.microforum.loggerintegrationtest.LoggerComponent;
 import es.microforum.model.Empleado;
 import es.microforum.serviceapi.EmpleadoService;
 
@@ -62,16 +63,21 @@ public class EmpleadoTest {
 	@Test
 	@Transactional
 	public void testAltaEmpleado() {
+		//LoggerComponent loggerComponent = new LoggerComponent();
+		//loggerComponent.trazaAntes();
 		empleadoService.altaModificacion(empleado1);
+		
 		String comprobacion=null;
 		List<Empleado> empleados = empleadoService.consultaListado();
-		System.out.println("Comprobacion de alta de empleado con dni=dni1");
-		System.out.println("Empleados: ");
+		//System.out.println("Comprobacion de alta de empleado con dni=dni1");
+		//System.out.println("Empleados: ");
 		for (Empleado empleado: empleados) {
 			if((empleado.getDni()).equals("dni1")){
 				comprobacion="true";
 			}
-			System.out.println(empleado.getDni()+" | "+empleado.getNombre());
+			//System.out.println(empleado.getDni()+" | "+empleado.getNombre());
+			//loggerComponent.trazaDespues(empleado.getNombre(), empleado.getDni());
+			
 		}
 		assertTrue(comprobacion.equals("true"));
 		
@@ -82,8 +88,8 @@ public class EmpleadoTest {
 	public void testBajaEmpleado() {
 		empleadoService.baja(empleado1);
 		List<Empleado> empleados = empleadoService.consultaListado();
-		System.out.println("Comprobacion de baja de empleado con dni=dni1");
-		System.out.println("Numero de empleados: " + empleados.size());
+		//System.out.println("Comprobacion de baja de empleado con dni=dni1");
+		//System.out.println("Numero de empleados: " + empleados.size());
 		assertTrue(empleados.size()==0);
 	}
 	
@@ -93,23 +99,23 @@ public class EmpleadoTest {
 		empleadoService.altaModificacion(empleado1);
 		empleadoService.altaModificacion(empleado2);
 		List<Empleado> empleados = empleadoService.consultaListado();
-		System.out.println("Comprobacion de alta de 2 empleados");
-		System.out.println("Empleados: ");
-		for (Empleado empleado: empleados) {
-			System.out.println(empleado.getDni()+" | "+empleado.getNombre());
-		}
+		//System.out.println("Comprobacion de alta de 2 empleados");
+		//System.out.println("Empleados: ");
+//		for (Empleado empleado: empleados) {
+//			System.out.println(empleado.getDni()+" | "+empleado.getNombre());
+//		}
 		Empleado empleadoA = empleadoService.consultaPorDni(empleado1.getDni());
 		empleadoA.setNombre("nomA");
 		empleadoService.altaModificacion(empleadoA);
 		String comprobacion=null;
 		empleados = empleadoService.consultaListado();
-		System.out.println("Comprobacion de modificacion del nombre de empleado con dni=dni1");
-		System.out.println("Empleados: ");
+		//System.out.println("Comprobacion de modificacion del nombre de empleado con dni=dni1");
+		//System.out.println("Empleados: ");
 		for (Empleado empleado: empleados) {
 			if((empleado.getNombre()).equals("nomA")){
 				comprobacion="true";
 			}
-			System.out.println(empleado.getDni()+" | "+empleado.getNombre());
+			//System.out.println(empleado.getDni()+" | "+empleado.getNombre());
 		}
 		assertTrue(comprobacion.equals("true"));
 	}
@@ -120,16 +126,16 @@ public class EmpleadoTest {
 		empleadoService.altaModificacion(empleado1);
 		empleadoService.altaModificacion(empleado2);
 		List<Empleado> empleados = empleadoService.consultaListado();
-		System.out.println("Comprobacion del listado de todos los empleados");
-		for (Empleado empleado : empleados) {
-			System.out.println(empleado.getDni()+" | "+empleado.getNombre());
-		}
+		//System.out.println("Comprobacion del listado de todos los empleados");
+//		for (Empleado empleado : empleados) {
+//			System.out.println(empleado.getDni()+" | "+empleado.getNombre());
+//		}
 		Empleado empleadoB = empleadoService.consultaPorDni("dni1");
 		Empleado empleadoC = empleadoService.consultaPorNombre("nom2");
-		System.out.println("Comprobacion de busqueda por dni del empleado con dni=dni1");
-		System.out.println(empleadoB.getDni()+" | "+empleadoB.getNombre());
-		System.out.println("Comprobacion de busqueda por nombre del empleado con nombre=nom2");
-		System.out.println(empleadoC.getDni()+" | "+empleadoC.getNombre());
+//		System.out.println("Comprobacion de busqueda por dni del empleado con dni=dni1");
+//		System.out.println(empleadoB.getDni()+" | "+empleadoB.getNombre());
+//		System.out.println("Comprobacion de busqueda por nombre del empleado con nombre=nom2");
+//		System.out.println(empleadoC.getDni()+" | "+empleadoC.getNombre());
 		assertTrue(empleados.size()==2);
 		assertTrue(empleadoB.getNombre().equals("nom1"));
 		assertTrue(empleadoC.getDni().equals("dni2"));
