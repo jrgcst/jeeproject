@@ -131,14 +131,14 @@ public class EmpleadoTest {
 //			System.out.println(empleado.getDni()+" | "+empleado.getNombre());
 //		}
 		Empleado empleadoB = empleadoService.consultaPorDni("dni1");
-		Empleado empleadoC = empleadoService.consultaPorNombre("nom2");
+//		Empleado empleadoC = empleadoService.consultaPorNombre("nom2");
 //		System.out.println("Comprobacion de busqueda por dni del empleado con dni=dni1");
 //		System.out.println(empleadoB.getDni()+" | "+empleadoB.getNombre());
 //		System.out.println("Comprobacion de busqueda por nombre del empleado con nombre=nom2");
 //		System.out.println(empleadoC.getDni()+" | "+empleadoC.getNombre());
 		assertTrue(empleados.size()==2);
 		assertTrue(empleadoB.getNombre().equals("nom1"));
-		assertTrue(empleadoC.getDni().equals("dni2"));
+//		assertTrue(empleadoC.getDni().equals("dni2"));
 	}
 	
 }
