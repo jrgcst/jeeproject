@@ -2,6 +2,9 @@ package es.microforum.serviceapi;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import es.microforum.model.Empresa;
 
 public interface EmpresaService {
@@ -13,7 +16,9 @@ public interface EmpresaService {
 	public Empresa consultaPorNif(String nif);
 	
 
-	public Empresa consultaPorNombre(String nombre);
+	//public Empresa consultaPorNombre(String nombre);
+	
+	public Page<Empresa> consultaPaginable(Pageable pageable);
 	
 	
 	public Empresa altaModificacion(Empresa empresa);

@@ -3,56 +3,51 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.microforum</groupId>
 	<artifactId>parent-pom</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<properties>
-		<spring.version>4.0.0.RELEASE</spring.version>
+		<spring.version>3.2.6.RELEASE</spring.version>
 		<junit.version>4.11</junit.version>
-		<persistenceapi.version>1.0.2</persistenceapi.version>
-		<jpa.version>1.4.3.RELEASE</jpa.version>
-		<google.version>10.0.1</google.version>
-		<hibernate1.version>3.6.10.Final</hibernate1.version>
-		<hibernate.jpa.2.0.version>1.0.1.Final</hibernate.jpa.2.0.version>
+		<hibernatejpa.version>1.0.1.Final</hibernatejpa.version>
+		<hibernateentitymanager.version>3.6.8.Final</hibernateentitymanager.version>
+		<springdatajpa.version>1.1.0.RELEASE</springdatajpa.version>
+		<spring-data-commons-core.version>1.3.1.RELEASE</spring-data-commons-core.version>
+		<com.google.guava.version>10.0.1</com.google.guava.version>
+		<log4j.version>1.2.17</log4j.version>
 		<slf4j.version>1.7.5</slf4j.version>
-<!-- 		<log4j.version>1.2.17</log4j.version> -->
-		<mysql.version>5.1.28</mysql.version>
-		<aspectjweaver.version>1.5.4</aspectjweaver.version>
 		<logback.version>1.0.13</logback.version>
+		<mysqlconnector.version>5.1.6</mysqlconnector.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.hibernate.javax.persistence</groupId>
-				<artifactId>hibernate-jpa-2.0-api</artifactId>
-				<version>${hibernate.jpa.2.0.version}</version>
-			</dependency>
-			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-core</artifactId>
 				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-webmvc</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>javax.persistence</groupId>
-				<artifactId>persistence-api</artifactId>
-				<version>${persistenceapi.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.data</groupId>
-				<artifactId>spring-data-jpa</artifactId>
-				<version>${jpa.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -61,56 +56,13 @@
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
-				<artifactId>spring-tx</artifactId>
+				<artifactId>spring-webmvc</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.google.guava</groupId>
-				<artifactId>guava</artifactId>
-				<version>${google.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-entitymanager</artifactId>
-				<version>${hibernate1.version}</version>
-			</dependency>
-<!-- 			<dependency> -->
-<!-- 				<groupId>org.slf4j</groupId> -->
-<!-- 				<artifactId>slf4j-log4j12</artifactId> -->
-<!-- 				<version>${slf4j.version}</version> -->
-<!-- 			</dependency> -->
-			<!-- <dependency> -->
-			<!-- <groupId>log4j</groupId> -->
-			<!-- <artifactId>log4j</artifactId> -->
-			<!-- <version>${log4j.version}</version> -->
-			<!-- </dependency> -->
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>${slf4j.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>ch.qos.logback</groupId>
-				<artifactId>logback-classic</artifactId>
-				<version>${logback.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>ch.qos.logback</groupId>
-				<artifactId>logback-core</artifactId>
-				<version>${logback.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-aop</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-aspects</artifactId>
-				<version>${spring.version}</version>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-jpa</artifactId>
+				<version>${springdatajpa.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -123,20 +75,36 @@
 				<version>${spring.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>mysql</groupId>
-				<artifactId>mysql-connector-java</artifactId>
-				<version>${mysql.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>aspectj</groupId>
-				<artifactId>aspectjweaver</artifactId>
-				<version>${aspectjweaver.version}</version>
-			</dependency>
-			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-test</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.hibernate.javax.persistence</groupId>
+				<artifactId>hibernate-jpa-2.0-api</artifactId>
+				<version>${hibernatejpa.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-entitymanager</artifactId>
+				<version>${hibernateentitymanager.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${com.google.guava.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysqlconnector.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-commons-core</artifactId>
+				<version>${spring-data-commons-core.version}</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -159,4 +127,5 @@
 			</plugin>
 		</plugins>
 	</build>
+
 </project>
