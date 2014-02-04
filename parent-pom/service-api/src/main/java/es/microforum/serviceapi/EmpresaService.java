@@ -17,8 +17,8 @@ public interface EmpresaService {
 	
 
 	//public Empresa consultaPorNombre(String nombre);
-	
 	public Page<Empresa> consultaPaginable(Pageable pageable);
+	public Page<Empresa> consultaPorNombrePaginable(String nombre, Pageable pageable);
 	
 	
 	public Empresa altaModificacion(Empresa empresa);

@@ -11,6 +11,6 @@ import es.microforum.model.Empleado;
 public interface EmpleadoRepository extends PagingAndSortingRepository<Empleado, String> {
 
 	//public Empleado findByNombre(String nombre);
-	//public Page<Empleado> findAll(Pageable pageable);
+	public Page<Empleado> findByNombre(String nombre, Pageable pageable);
 
 }

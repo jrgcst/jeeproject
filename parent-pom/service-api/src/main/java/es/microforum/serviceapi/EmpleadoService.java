@@ -6,6 +6,7 @@ import java.util.List;
 
 
 
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -20,10 +21,12 @@ public interface EmpleadoService {
 	
 
 	public Empleado consultaPorDni(String dni);
+	public Empleado consultaPorDniEmpresa(String dni);
 	
 
 	//public Empleado consultaPorNombre(String nombre);
-	public Page<Empleado> consultaPorNombrePaginable(Pageable pageable);
+	public Page<Empleado> consultaPaginable(Pageable pageable);
+	public Page<Empleado> consultaPorNombrePaginable(String nombre, Pageable pageable);
 	
 	
 	public Empleado altaModificacion(Empleado empleado);

@@ -36,12 +36,21 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 //	}
 	
 	@Transactional(readOnly=true)	
-	public Page<Empleado> consultaPorNombrePaginable(Pageable pageable) {
+	public Page<Empleado> consultaPaginable(Pageable pageable) {
 		return empleadoRepository.findAll(pageable);
+	}
+	@Transactional(readOnly=true)	
+	public Page<Empleado> consultaPorNombrePaginable(String nombre, Pageable pageable) {
+		return empleadoRepository.findByNombre(nombre, pageable);
 	}
 
 	public Empleado consultaPorDni(String dni) {
 		return empleadoRepository.findOne(dni);
+	}
+	public Empleado consultaPorDniEmpresa(String dni) {
+		Empleado empleado = empleadoRepository.findOne(dni);
+		empleado.getEmpresa().getEmpleados().size();
+		return empleado;
 	}
 
 	public Empleado altaModificacion(Empleado empleado) {

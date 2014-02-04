@@ -42,6 +42,10 @@ public class EmpresaServiceImpl implements EmpresaService {
 	public Page<Empresa> consultaPaginable(Pageable pageable){
 		return empresaRepository.findAll(pageable);
 	}
+	@Transactional(readOnly=true)
+	public Page<Empresa> consultaPorNombrePaginable(String nombre, Pageable pageable){
+		return empresaRepository.findByNombre(nombre, pageable);
+	}
 
 	@Transactional(readOnly=true)
 	public Empresa consultaPorNif(String nif) {
