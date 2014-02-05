@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.common.collect.Lists;
 
 import es.microforum.model.Empleado;
+import es.microforum.model.Empresa;
 import es.microforum.repository.EmpleadoRepository;
 import es.microforum.serviceapi.EmpleadoService;
 
@@ -49,7 +50,8 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 	}
 	public Empleado consultaPorDniEmpresa(String dni) {
 		Empleado empleado = empleadoRepository.findOne(dni);
-		empleado.getEmpresa().getEmpleados().size();
+		Empresa empresa = empleado.getEmpresa();
+		empresa.getEmpleados().size();
 		return empleado;
 	}
 

@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
-
 @Entity
 @Table(name = "empleado", catalog = "jee")
 public class Empleado implements java.io.Serializable {
@@ -177,7 +176,16 @@ public class Empleado implements java.io.Serializable {
 			return false;
 		return true;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+
+		return " DNI=" + getDni() + ", Empresa=" + getEmpresa() + ", Nombre="
+				+ getNombre() + ", Direccion=" + getDireccion()
+				+ ", TipoEmpleado=" + getTipoEmpleado() + ", EmpleadoCol="
+				+ getEmpleadocol() + ", SalarioAnual=" + getSalarioAnual()
+				+ ", ValorHora=" + getValorHora() + ", CantidadHoras="
+				+ getCantidadHoras();
+	}
 
 }

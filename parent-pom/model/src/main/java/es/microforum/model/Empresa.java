@@ -16,7 +16,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
-
 @Entity
 @Table(name = "empresa", catalog = "jee")
 public class Empresa implements java.io.Serializable {
@@ -125,7 +124,13 @@ public class Empresa implements java.io.Serializable {
 			return false;
 		return true;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+
+		return " NIF=" + getNif() + ", Version=" + getVersion() + ", Nombre="
+				+ getNombre() + ", DireccionFiscal=" + getDireccionFiscal()
+				+ ", FechaInicioActividades=" + getFechaInicioActividades();
+	}
 
 }
