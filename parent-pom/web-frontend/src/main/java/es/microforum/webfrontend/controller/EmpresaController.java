@@ -50,7 +50,7 @@ public class EmpresaController {
 
 	@InitBinder
     public void initBinder(WebDataBinder binder) {
-        CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("yyyy/mm/dd"), true);
+        CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("yy/MM/dd"), true);
         binder.registerCustomEditor(Date.class, editor);
     }
 	
