@@ -31,10 +31,6 @@
                        <sec:authorize access="hasRole('supervisor')">
                        {title: "${labelEmpleados}", action:"empleados"},
                        {title: "${labelEmpresas}", action:"empresas"},
-                       {title: "${labelUpload}", action:"upload"},
-                       {title: "${labelCombo}", action:"combo"},
-                       {title: "${labelCombosAjax}", action:"combosAjax"},
-                       {title: "pruebas", action:"prueba"},
                       </sec:authorize>
                     ]
                 },

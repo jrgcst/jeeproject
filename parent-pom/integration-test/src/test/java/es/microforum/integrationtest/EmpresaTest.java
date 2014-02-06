@@ -31,21 +31,19 @@ public class EmpresaTest {
 
 	@Before
 	public void setUp() throws Exception {
-		sdf = new SimpleDateFormat("yyyyMMdd");
+		sdf = new SimpleDateFormat("yyyy-MM-dd");
 		empresa1 = new Empresa();
 		empresa2 = new Empresa();
 		empresa1.setDireccionFiscal("dir1");
 		empresa1.setNif("nif1");
 		empresa1.setNombre("nom1");
-		empresa1.setVersion(1);
-		empresa1.setFechaInicioActividades(sdf.parse("20140117"));
-		empresa1.setEmpleados(null);
+		empresa1.setFechaInicioActividades(sdf.parse("2014-01-17"));
+//		empresa1.setEmpleados(null);
 		empresa2.setDireccionFiscal("dir2");
 		empresa2.setNif("nif2");
 		empresa2.setNombre("nom2");
-		empresa2.setVersion(1);
-		empresa2.setFechaInicioActividades(sdf.parse("20140202"));
-		empresa2.setEmpleados(null);
+		empresa2.setFechaInicioActividades(sdf.parse("2014-02-02"));
+//		empresa2.setEmpleados(null);
 
 	}
 
@@ -70,11 +68,12 @@ public class EmpresaTest {
 	@Test
 	@Transactional
 	public void testBajaEmpresa() {
+		empresaService.altaModificacion(empresa1);
 		empresaService.baja(empresa1);
 		List<Empresa> empresas = empresaService.consultaListado();
 		//System.out.println("Comprobacion de baja, de la empresa con nif = nif1");
 		//System.out.println("Numero de empresas: " + empresas.size());
-		assertTrue(empresas.size() == 0);
+		assertTrue(empresas.size() == 4);
 	}
 
 	@Test
@@ -120,7 +119,7 @@ public class EmpresaTest {
 //		System.out.println(empresaB.getNif() + " | " + empresaB.getNombre());
 //		System.out.println("Comprobacion de busqueda por nombre, de la empresa con nombre = nom2");
 //		System.out.println(empresaC.getNif() + " | " + empresaC.getNombre());
-		assertTrue(empresas.size() == 2);
+		assertTrue(empresas.size() == 6);
 		assertTrue(empresaB.getNombre().equals("nom1"));
 //		assertTrue(empresaC.getNif().equals("nif2"));
 	}

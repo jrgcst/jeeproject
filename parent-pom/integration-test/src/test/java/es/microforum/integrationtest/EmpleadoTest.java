@@ -2,6 +2,7 @@ package es.microforum.integrationtest;
 
 import static org.junit.Assert.*;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.junit.Before;
@@ -13,49 +14,60 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+
+
+
 //import es.microforum.loggerintegrationtest.LoggerComponent;
 import es.microforum.model.Empleado;
+import es.microforum.model.Empresa;
 import es.microforum.serviceapi.EmpleadoService;
+import es.microforum.serviceapi.EmpresaService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:app-context.xml")
 @TransactionConfiguration(defaultRollback=true)
 public class EmpleadoTest {
+	SimpleDateFormat sdf;
 	
 	@Autowired
 	private EmpleadoService empleadoService;
+	@Autowired
+	private EmpresaService empresaService;
 	
 	Empleado empleado1;
 	Empleado empleado2;
+	Empresa empresa1;
 	
 		
 	@Before
 	public void setUp() throws Exception {
+		sdf = new SimpleDateFormat("yyyy-MM-dd");
 		empleado1 = new Empleado();
 		empleado2 = new Empleado();
+		empresa1 = new Empresa();
+		empresa1.setDireccionFiscal("dir1");
+		empresa1.setNif("nif1");
+		empresa1.setNombre("nom1");
+		empresa1.setFechaInicioActividades(sdf.parse("2014-01-17"));
 		empleado1.setCantidadHoras(160d);
 		empleado1.setDireccion("dir1");
 		empleado1.setDni("dni1");
 		empleado1.setEmpleadocol("empleadocol1");
-		empleado1.setImagen(null);
 		empleado1.setNombre("nom1");
 		empleado1.setSalarioAnual(12000d);
 		empleado1.setTipoEmpleado("tipo1");
 		empleado1.setValorHora(7d);
-		empleado1.setVersion(1);
-		empleado1.setEmpresa(null);
+		empleado1.setEmpresa(empresa1);
 		empleado2.setCantidadHoras(160d);
 		empleado2.setDireccion("dir2");
 		empleado2.setDni("dni2");
 		empleado2.setEmpleadocol("empleadocol2");
-		empleado2.setImagen(null);
 		empleado2.setNombre("nom2");
 		empleado2.setSalarioAnual(15000d);
 		empleado2.setTipoEmpleado("tipo2");
 		empleado2.setValorHora(7d);
-		empleado2.setVersion(1);
-		empleado2.setEmpresa(null);
+		empleado2.setEmpresa(empresa1);
 	}
 
 	
@@ -65,6 +77,8 @@ public class EmpleadoTest {
 	public void testAltaEmpleado() {
 		//LoggerComponent loggerComponent = new LoggerComponent();
 		//loggerComponent.trazaAntes();
+		Empresa emp = empresaService.altaModificacion(empresa1);
+		empleado1.setEmpresa(emp);
 		empleadoService.altaModificacion(empleado1);
 		
 		String comprobacion=null;
@@ -86,6 +100,9 @@ public class EmpleadoTest {
 	@Test
 	@Transactional
 	public void testBajaEmpleado() {
+		Empresa emp = empresaService.altaModificacion(empresa1);
+		empleado1.setEmpresa(emp);
+		empleadoService.altaModificacion(empleado1);
 		empleadoService.baja(empleado1);
 		List<Empleado> empleados = empleadoService.consultaListado();
 		//System.out.println("Comprobacion de baja de empleado con dni=dni1");
@@ -96,7 +113,10 @@ public class EmpleadoTest {
 	@Test
 	@Transactional
 	public void testModificacionEmpleado() {
+		Empresa emp = empresaService.altaModificacion(empresa1);
+		empleado1.setEmpresa(emp);
 		empleadoService.altaModificacion(empleado1);
+		empleado2.setEmpresa(emp);
 		empleadoService.altaModificacion(empleado2);
 		List<Empleado> empleados = empleadoService.consultaListado();
 		//System.out.println("Comprobacion de alta de 2 empleados");
@@ -123,7 +143,10 @@ public class EmpleadoTest {
 	@Test
 	@Transactional
 	public void testConsultaEmpleado() {
+		Empresa emp = empresaService.altaModificacion(empresa1);
+		empleado1.setEmpresa(emp);
 		empleadoService.altaModificacion(empleado1);
+		empleado2.setEmpresa(emp);
 		empleadoService.altaModificacion(empleado2);
 		List<Empleado> empleados = empleadoService.consultaListado();
 		//System.out.println("Comprobacion del listado de todos los empleados");
@@ -131,14 +154,14 @@ public class EmpleadoTest {
 //			System.out.println(empleado.getDni()+" | "+empleado.getNombre());
 //		}
 		Empleado empleadoB = empleadoService.consultaPorDni("dni1");
-//		Empleado empleadoC = empleadoService.consultaPorNombre("nom2");
+
 //		System.out.println("Comprobacion de busqueda por dni del empleado con dni=dni1");
 //		System.out.println(empleadoB.getDni()+" | "+empleadoB.getNombre());
 //		System.out.println("Comprobacion de busqueda por nombre del empleado con nombre=nom2");
 //		System.out.println(empleadoC.getDni()+" | "+empleadoC.getNombre());
 		assertTrue(empleados.size()==2);
 		assertTrue(empleadoB.getNombre().equals("nom1"));
-//		assertTrue(empleadoC.getDni().equals("dni2"));
+
 	}
 	
 }
