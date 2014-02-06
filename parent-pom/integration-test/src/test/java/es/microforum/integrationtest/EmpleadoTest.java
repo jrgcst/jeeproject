@@ -38,6 +38,7 @@ public class EmpleadoTest {
 	Empleado empleado1;
 	Empleado empleado2;
 	Empresa empresa1;
+	int numeroEmpleadosAntes;
 	
 		
 	@Before
@@ -101,13 +102,14 @@ public class EmpleadoTest {
 	@Transactional
 	public void testBajaEmpleado() {
 		Empresa emp = empresaService.altaModificacion(empresa1);
+		numeroEmpleadosAntes = empleadoService.consultaListado().size();
 		empleado1.setEmpresa(emp);
 		empleadoService.altaModificacion(empleado1);
 		empleadoService.baja(empleado1);
 		List<Empleado> empleados = empleadoService.consultaListado();
 		//System.out.println("Comprobacion de baja de empleado con dni=dni1");
 		//System.out.println("Numero de empleados: " + empleados.size());
-		assertTrue(empleados.size()==0);
+		assertTrue(empleados.size()==(numeroEmpleadosAntes));
 	}
 	
 	@Test
@@ -144,6 +146,7 @@ public class EmpleadoTest {
 	@Transactional
 	public void testConsultaEmpleado() {
 		Empresa emp = empresaService.altaModificacion(empresa1);
+		numeroEmpleadosAntes = empleadoService.consultaListado().size();
 		empleado1.setEmpresa(emp);
 		empleadoService.altaModificacion(empleado1);
 		empleado2.setEmpresa(emp);
@@ -159,7 +162,7 @@ public class EmpleadoTest {
 //		System.out.println(empleadoB.getDni()+" | "+empleadoB.getNombre());
 //		System.out.println("Comprobacion de busqueda por nombre del empleado con nombre=nom2");
 //		System.out.println(empleadoC.getDni()+" | "+empleadoC.getNombre());
-		assertTrue(empleados.size()==2);
+		assertTrue(empleados.size()==(numeroEmpleadosAntes+2));
 		assertTrue(empleadoB.getNombre().equals("nom1"));
 
 	}
