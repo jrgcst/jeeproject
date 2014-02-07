@@ -43,7 +43,7 @@ public class EmpleadoRepositoryJsonClientTest {
 	@Test
 	public void getTest() {
 		try {
-			Resource<Empleado> resource = getEmpleado(new URI("http://localhost:8081/rest_jeeproject-1.0.0.BUILD-SNAPSHOT/empleado/03444444S"));
+			Resource<Empleado> resource = getEmpleado(new URI("http://localhost:8081/service-frontend-0.0.3-SNAPSHOT/empleado/03444444S"));
 			assertTrue(resource.getContent().getNombre().equals("Pepe"));
 		} catch (Exception e) {
 			e.printStackTrace();
