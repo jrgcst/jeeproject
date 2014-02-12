@@ -112,9 +112,9 @@ public class EmpresaTest {
 		empresaService.altaModificacion(empresa2);
 		List<Empresa> empresas = empresaService.consultaListado();
 		//System.out.println("Comprobacion del listado de todas las empresas");
-		for (Empresa empresa : empresas) {
+//		for (Empresa empresa : empresas) {
 			//System.out.println("- Empresa: " + empresa.getNif() + " | "+ empresa.getNombre());
-		}
+//		}
 		Empresa empresaB = empresaService.consultaPorNif("nif1");
 //		Empresa empresaC = empresaService.consultaPorNombre("nom2");
 //		System.out.println("Comprobacion de busqueda por nif, de la empresa con nif = nif1");

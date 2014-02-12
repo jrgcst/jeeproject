@@ -63,6 +63,14 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 		empleadoRepository.delete(empleado);
 		
 	}
+	
+	public void modificacionSalario(Float porcentaje){
+		List<Empleado> empleados = Lists.newArrayList(empleadoRepository.findAll());
+		for(Empleado e : empleados){
+			Double salarioAnual = e.getSalarioAnual();
+			e.setSalarioAnual(salarioAnual+((salarioAnual*porcentaje)/100));
+		}
+	}
 
 	
 }

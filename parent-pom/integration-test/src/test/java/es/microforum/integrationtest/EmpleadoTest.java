@@ -167,4 +167,28 @@ public class EmpleadoTest {
 
 	}
 	
+	@Test
+	@Transactional
+	public void testModificacionSalario() {
+		Empresa emp = empresaService.altaModificacion(empresa1);
+
+		empleado1.setEmpresa(emp);
+		empleadoService.altaModificacion(empleado1);
+		empleado2.setEmpresa(emp);
+		empleadoService.altaModificacion(empleado2);
+		//Incremento del 3.5%
+		empleadoService.modificacionSalario(3.5f);
+		Empleado empleadoA = empleadoService.consultaPorDni("dni1");
+		Empleado empleadoB = empleadoService.consultaPorDni("dni2");
+		assertTrue(empleadoA.getSalarioAnual()==12420d);
+		assertTrue(empleadoB.getSalarioAnual()==15525d);
+		//Decremento del 3.5%
+		empleadoService.modificacionSalario(-3.5f);
+		empleadoA = empleadoService.consultaPorDni("dni1");
+		empleadoB = empleadoService.consultaPorDni("dni2");
+		assertTrue(empleadoA.getSalarioAnual()==11985.3d);
+		assertTrue(empleadoB.getSalarioAnual()==14981.625d);
+
+	}
+	
 }
