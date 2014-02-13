@@ -1,42 +1,94 @@
 package es.microforum.servicefrontend.soap;
 
-import static org.junit.Assert.assertEquals;
+
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
 
-import javax.sql.DataSource;
 
-import org.junit.After;
+
+
+
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.jdbc.core.JdbcTemplate;
+
+
+
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.microforum.model.Empleado;
+import es.microforum.model.Empresa;
 import es.microforum.serviceapi.EmpleadoService;
+import es.microforum.serviceapi.EmpresaService;
 
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:app-context.xml")
+@TransactionConfiguration(defaultRollback=true)
 public class JaxServiceClientTest {
+	@Autowired
 	private IModificadorSalarioWebService modificadorSalarioWebService;
-	private JdbcTemplate jdbcTemplate;
-	EmpleadoService empleadoService;
-	//List<Empleado> empleados;
+	
+	@Autowired
+	private EmpleadoService empleadoService;
+	@Autowired
+	private EmpresaService empresaService;
+	
 
+	
+	Empleado empleado1;
+	Empleado empleado2;
+	Empresa empresa1;
+	SimpleDateFormat sdf;
+	
 	@Before
 	public void setUp() throws Exception {
 		try {
-			ApplicationContext context = new ClassPathXmlApplicationContext("applicationClientContext.xml");
-			DataSource dataSource = (DataSource) context.getBean("dataSource");
-			jdbcTemplate = new JdbcTemplate(dataSource);
-			jdbcTemplate.execute("DELETE FROM empleado where dni='dniTEST1'");
-			jdbcTemplate.execute("INSERT INTO empresa values('nifTEST', 'nombreTEST', 'direccionTEST', '2014-02-26 00:00:00', '0')");
-			jdbcTemplate.execute("INSERT INTO `jee`.`empleado` (`dni`, `nombre`, `direccion`, `tipoEmpleado`, `empleadocol`, `salarioAnual`, `valorHora`, `cantidadHoras`, `nif`, `version`) VALUES ('dni1TEST', 'nombre1TEST', 'direccion1TEST', 'tipoE1TEST', 'empcol1TEST', '12000', '10', '100', 'nif1TEST', '0')");
-			jdbcTemplate.execute("INSERT INTO `jee`.`empleado` (`dni`, `nombre`, `direccion`, `tipoEmpleado`, `empleadocol`, `salarioAnual`, `valorHora`, `cantidadHoras`, `nif`, `version`) VALUES ('dni2TEST', 'nombre2TEST', 'direccion2TEST', 'tipoE2TEST', 'empcol2TEST', '15000', '10', '100', 'nif2TEST', '0')");
+			sdf = new SimpleDateFormat("yyyy-MM-dd");
+			empleado1 = new Empleado();
+			empleado2 = new Empleado();
+			empresa1 = new Empresa();
+			empresa1.setDireccionFiscal("dir1");
+			empresa1.setNif("nif1");
+			empresa1.setNombre("nom1");
+			empresa1.setFechaInicioActividades(sdf.parse("2014-01-17"));
+			empleado1.setCantidadHoras(160d);
+			empleado1.setDireccion("dir1");
+			empleado1.setDni("dni1TEST");
+			empleado1.setEmpleadocol("empleadocol1");
+			empleado1.setNombre("nom1");
+			empleado1.setSalarioAnual(12000d);
+			empleado1.setTipoEmpleado("tipo1");
+			empleado1.setValorHora(7d);
+			empleado1.setEmpresa(empresa1);
+			empleado2.setCantidadHoras(160d);
+			empleado2.setDireccion("dir2");
+			empleado2.setDni("dni2TEST");
+			empleado2.setEmpleadocol("empleadocol2");
+			empleado2.setNombre("nom2");
+			empleado2.setSalarioAnual(15000d);
+			empleado2.setTipoEmpleado("tipo2");
+			empleado2.setValorHora(7d);
+			empleado2.setEmpresa(empresa1);
+			
+			ApplicationContext context = new ClassPathXmlApplicationContext("app-context.xml");		
 			modificadorSalarioWebService = (IModificadorSalarioWebService) context.getBean("jaxModificadorSalarioWebService");
-			empleadoService = context.getBean("empleadoService", EmpleadoService.class);
+			//empleadoService = context.getBean("empleadoService", EmpleadoService.class);
+			
+			Empresa emp = empresaService.altaModificacion(empresa1);
+			empleado1.setEmpresa(emp);
+			empleadoService.altaModificacion(empleado1);
+			empleado2.setEmpresa(emp);
+			empleadoService.altaModificacion(empleado2);
+			
 		} catch (Throwable t) {
 			t.printStackTrace();
 			fail();
@@ -44,8 +96,8 @@ public class JaxServiceClientTest {
 	}
 
 	@Test
-	public void testCallSumador() {
-		//empleados = empleadoService.consultaListado();
+	@Transactional
+	public void testCallModificadorSalario() {
 		try {
 			modificadorSalarioWebService.callModificadorSalario(3.5f);
 			assertTrue(empleadoService.consultaPorDni("dni1TEST").getSalarioAnual()==12420d);
@@ -59,13 +111,7 @@ public class JaxServiceClientTest {
 		}
 	}
 	
-	@After
-	public void after() {
-		jdbcTemplate.execute("DELETE FROM empleado where dni='dni1TEST'");
-		jdbcTemplate.execute("DELETE FROM empleado where dni='dni2TEST'");
-		jdbcTemplate.execute("DELETE FROM empresa where nif='nifTEST1'");
-		
-	}
+
 
 
 }
