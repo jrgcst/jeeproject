@@ -104,9 +104,12 @@ public class JaxServiceClientTest {
 	
 	@After
 	public void after() {
-		//empleadoService.baja(empleado1);
-		//empleadoService.baja(empleado2);
-		//empresaService.baja(empresa1);
+		empleado1 = empleadoService.consultaPorDni("dni1TEST");
+		empleado2 = empleadoService.consultaPorDni("dni2TEST");
+		empresa1 = empresaService.consultaPorNif("nifTEST");
+		empleadoService.baja(empleado1);
+		empleadoService.baja(empleado2);
+		empresaService.baja(empresa1);
 		
 	}
 	
