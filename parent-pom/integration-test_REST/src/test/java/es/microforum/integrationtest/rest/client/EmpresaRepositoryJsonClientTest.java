@@ -57,7 +57,7 @@ public class EmpresaRepositoryJsonClientTest {
 	public void getTest() {
 		try {
 			jdbcTemplate.execute("INSERT INTO empresa VALUES ('nifTEST1', 'nombreTEST1', 'direccionTEST1', '2014-02-26', '0')");
-			Resource<Empresa> resource = getEmpresa(new URI("http://localhost:8081/service-frontend-0.0.4-SNAPSHOT/empresa/nifTEST1"));
+			Resource<Empresa> resource = getEmpresa(new URI("http://localhost:8081/service-frontend-0.0.4/empresa/nifTEST1"));
 			assertTrue(resource.getContent().getNombre().equals("nombreTEST1"));
 			jdbcTemplate.execute("DELETE FROM empresa where nombre like 'nombreTEST1%'");
 		} catch (Exception e) {
@@ -77,7 +77,7 @@ public class EmpresaRepositoryJsonClientTest {
 	@Test
 	public void postTest() throws RestClientException, URISyntaxException {
 		jdbcTemplate.execute("DELETE FROM empresa where nif like 'nifTEST1'");
-		String url = "http://localhost:8081/service-frontend-0.0.4-SNAPSHOT/empresa";
+		String url = "http://localhost:8081/service-frontend-0.0.4/empresa";
 		String acceptHeaderValue = "application/json";
 
 		HttpHeaders requestHeaders = new HttpHeaders();
@@ -100,7 +100,7 @@ public class EmpresaRepositoryJsonClientTest {
 	@Test
 	public void putTest() throws RestClientException, URISyntaxException {
 		jdbcTemplate.execute("INSERT INTO empresa VALUES ('nifTEST1', 'nombreTEST1', 'direccionTEST1', '2014-02-26', '0')");
-		String url = "http://localhost:8081/service-frontend-0.0.4-SNAPSHOT/empresa/nifTEST1";
+		String url = "http://localhost:8081/service-frontend-0.0.4/empresa/nifTEST1";
 		String acceptHeaderValue = "application/json";
 
 		HttpHeaders requestHeaders = new HttpHeaders();
@@ -126,7 +126,7 @@ public class EmpresaRepositoryJsonClientTest {
 			jdbcTemplate.execute("INSERT INTO empresa values('nifTEST1', 'nombreTEST1', 'direccionTEST1', '2014-02-26', '0')");
 			int count = jdbcTemplate.queryForInt("select count(*) from empresa where nif='nifTEST1'");
 			assertTrue(count == 1);
-			restTemplate.delete("http://localhost:8081/service-frontend-0.0.4-SNAPSHOT/empresa/nifTEST1");
+			restTemplate.delete("http://localhost:8081/service-frontend-0.0.4/empresa/nifTEST1");
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

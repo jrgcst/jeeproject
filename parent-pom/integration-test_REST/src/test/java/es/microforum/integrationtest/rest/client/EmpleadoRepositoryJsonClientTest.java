@@ -58,7 +58,7 @@ public class EmpleadoRepositoryJsonClientTest {
 	public void getTest() {
 		try {
 			jdbcTemplate.execute("INSERT INTO `jee`.`empleado` (`dni`, `nombre`, `direccion`, `tipoEmpleado`, `empleadocol`, `salarioAnual`, `valorHora`, `cantidadHoras`, `nif`, `version`) VALUES ('dniTEST1', 'nombreTEST1', 'direccionTEST1', 'tipoETEST1', 'empcolTEST1', '10000', '10', '100', 'nifTEST1', '0')");
-			Resource<Empleado> resource = getEmpleado(new URI("http://localhost:8081/service-frontend-0.0.4-SNAPSHOT/empleado/dniTEST1"));
+			Resource<Empleado> resource = getEmpleado(new URI("http://localhost:8081/service-frontend-0.0.4/empleado/dniTEST1"));
 			assertTrue(resource.getContent().getNombre().equals("nombreTEST1"));
 			jdbcTemplate.execute("DELETE FROM empleado where nombre like 'nombreTEST1%'");
 		} catch (Exception e) {
@@ -76,7 +76,7 @@ public class EmpleadoRepositoryJsonClientTest {
 	@Test
 	public void postTest() throws RestClientException, URISyntaxException {
 		jdbcTemplate.execute("DELETE FROM empleado where dni like 'dniTEST1'");
-		String url = "http://localhost:8081/service-frontend-0.0.4-SNAPSHOT/empleado";
+		String url = "http://localhost:8081/service-frontend-0.0.4/empleado";
 		String acceptHeaderValue = "application/json";
 
 		HttpHeaders requestHeaders = new HttpHeaders();
@@ -99,7 +99,7 @@ public class EmpleadoRepositoryJsonClientTest {
 	@Test
 	public void putTest() throws RestClientException, URISyntaxException {
 		jdbcTemplate.execute("INSERT INTO `jee`.`empleado` (`dni`, `nombre`, `direccion`, `tipoEmpleado`, `empleadocol`, `salarioAnual`, `valorHora`, `cantidadHoras`, `nif`, `version`) VALUES ('dniTEST1', 'nombreTEST1', 'direccionTEST1', 'tipoETEST1', 'empcolTEST1', '10000', '10', '100', 'nifTEST1', '0')");
-		String url = "http://localhost:8081/service-frontend-0.0.4-SNAPSHOT/empleado/dniTEST1";
+		String url = "http://localhost:8081/service-frontend-0.0.4/empleado/dniTEST1";
 		String acceptHeaderValue = "application/json";
 
 		HttpHeaders requestHeaders = new HttpHeaders();
@@ -125,7 +125,7 @@ public class EmpleadoRepositoryJsonClientTest {
 			jdbcTemplate.execute("INSERT INTO `jee`.`empleado` (`dni`, `nombre`, `direccion`, `tipoEmpleado`, `empleadocol`, `salarioAnual`, `valorHora`, `cantidadHoras`, `nif`, `version`) VALUES ('dniTEST1', 'nombreTEST1', 'direccionTEST1', 'tipoETEST1', 'empcolTEST1', '10000', '10', '100', 'nifTEST1', '0')");
 			int count = jdbcTemplate.queryForInt("select count(*) from empleado where dni='dniTEST1'");
 			assertTrue(count == 1);
-			restTemplate.delete("http://localhost:8081/service-frontend-0.0.4-SNAPSHOT/empleado/dniTEST1");
+			restTemplate.delete("http://localhost:8081/service-frontend-0.0.4/empleado/dniTEST1");
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

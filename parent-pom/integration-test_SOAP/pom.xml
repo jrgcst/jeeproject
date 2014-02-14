@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>es.microforum</groupId>
 		<artifactId>parent-pom</artifactId>
-		<version>0.0.4-SNAPSHOT</version>
+		<version>0.0.4</version>
 	</parent>
 	<artifactId>integration-test_SOAP</artifactId>
 
@@ -66,25 +66,25 @@
 		<dependency>
 			<groupId>es.microforum</groupId>
 			<artifactId>model</artifactId>
-			<version>0.0.4-SNAPSHOT</version>
+			<version>0.0.4</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>es.microforum</groupId>
 			<artifactId>service-api</artifactId>
-			<version>0.0.4-SNAPSHOT</version>
+			<version>0.0.4</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>es.microforum</groupId>
 			<artifactId>service-impl</artifactId>
-			<version>0.0.4-SNAPSHOT</version>
+			<version>0.0.4</version>
 			<scope>compile</scope>
 		</dependency>
 				<dependency>
 			<groupId>es.microforum</groupId>
 			<artifactId>service-frontend-soap</artifactId>
-			<version>0.0.4-SNAPSHOT</version>
+			<version>0.0.4</version>
 			<scope>compile</scope>
 		</dependency>
 
