@@ -34,7 +34,7 @@ public interface EmpleadoService {
 
 	public void baja(Empleado empleado);
 	
-	public void modificacionSalario(Float porcentaje);
+	public abstract void modificacionSalario(Float porcentaje);
 	
 		
 }

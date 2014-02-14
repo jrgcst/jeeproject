@@ -69,6 +69,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 		for(Empleado e : empleados){
 			Double salarioAnual = e.getSalarioAnual();
 			e.setSalarioAnual(salarioAnual+((salarioAnual*porcentaje)/100));
+			empleadoRepository.save(e);
 		}
 	}
 

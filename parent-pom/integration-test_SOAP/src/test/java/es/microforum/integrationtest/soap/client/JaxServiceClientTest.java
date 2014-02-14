@@ -1,48 +1,35 @@
-package es.microforum.servicefrontend.soap;
-
+package es.microforum.integrationtest.soap.client;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.text.SimpleDateFormat;
 
-
-
-
-
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
 
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springframework.transaction.annotation.Transactional;
 
 import es.microforum.model.Empleado;
 import es.microforum.model.Empresa;
 import es.microforum.serviceapi.EmpleadoService;
 import es.microforum.serviceapi.EmpresaService;
+import es.microforum.servicefrontend.soap.IModificadorSalarioWebService;
 
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:app-context.xml")
-@TransactionConfiguration(defaultRollback=true)
 public class JaxServiceClientTest {
-	@Autowired
+
 	private IModificadorSalarioWebService modificadorSalarioWebService;
 	
-	@Autowired
-	private EmpleadoService empleadoService;
-	@Autowired
-	private EmpresaService empresaService;
-	
 
+	private EmpleadoService empleadoService;
+	private EmpresaService empresaService;
+
+	private ApplicationContext context;
 	
 	Empleado empleado1;
 	Empleado empleado2;
@@ -57,7 +44,7 @@ public class JaxServiceClientTest {
 			empleado2 = new Empleado();
 			empresa1 = new Empresa();
 			empresa1.setDireccionFiscal("dir1");
-			empresa1.setNif("nif1");
+			empresa1.setNif("nifTEST");
 			empresa1.setNombre("nom1");
 			empresa1.setFechaInicioActividades(sdf.parse("2014-01-17"));
 			empleado1.setCantidadHoras(160d);
@@ -79,15 +66,12 @@ public class JaxServiceClientTest {
 			empleado2.setValorHora(7d);
 			empleado2.setEmpresa(empresa1);
 			
-			ApplicationContext context = new ClassPathXmlApplicationContext("app-context.xml");		
+			context = new ClassPathXmlApplicationContext("app-context.xml");		
 			modificadorSalarioWebService = (IModificadorSalarioWebService) context.getBean("jaxModificadorSalarioWebService");
-			//empleadoService = context.getBean("empleadoService", EmpleadoService.class);
+			empresaService = context.getBean("empresaService", EmpresaService.class);
+			empleadoService = context.getBean("empleadoService", EmpleadoService.class);
 			
-			Empresa emp = empresaService.altaModificacion(empresa1);
-			empleado1.setEmpresa(emp);
-			empleadoService.altaModificacion(empleado1);
-			empleado2.setEmpresa(emp);
-			empleadoService.altaModificacion(empleado2);
+			
 			
 		} catch (Throwable t) {
 			t.printStackTrace();
@@ -96,19 +80,34 @@ public class JaxServiceClientTest {
 	}
 
 	@Test
-	@Transactional
 	public void testCallModificadorSalario() {
 		try {
+			Empresa emp = empresaService.altaModificacion(empresa1);
+			empleado1.setEmpresa(emp);
+			empleadoService.altaModificacion(empleado1);
+			empleado2.setEmpresa(emp);
+			empleadoService.altaModificacion(empleado2);
+			
 			modificadorSalarioWebService.callModificadorSalario(3.5f);
 			assertTrue(empleadoService.consultaPorDni("dni1TEST").getSalarioAnual()==12420d);
 			assertTrue(empleadoService.consultaPorDni("dni2TEST").getSalarioAnual()==15525d);
 			modificadorSalarioWebService.callModificadorSalario(-3.5f);
 			assertTrue(empleadoService.consultaPorDni("dni1TEST").getSalarioAnual()==11985.3d);
 			assertTrue(empleadoService.consultaPorDni("dni2TEST").getSalarioAnual()==14981.625d);
+
 		} catch (Throwable t) {
 			t.printStackTrace();
 			fail();
 		}
+	}
+	
+	
+	@After
+	public void after() {
+		//empleadoService.baja(empleado1);
+		//empleadoService.baja(empleado2);
+		//empresaService.baja(empresa1);
+		
 	}
 	
 
